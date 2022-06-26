@@ -1,0 +1,74 @@
+query findUserByEmail($email: String!) {
+  users(where: { email: { _eq: $email } }) {
+    id
+    password
+  }
+}
+
+query getMe($id: String!) {
+  users_by_pk(id: $id) {
+    avatar
+    created_at
+    email
+    id
+    name
+    position
+  }
+}
+
+
+query getConversation {
+  conversations {
+    unreadCount
+    type
+    id
+    messages {
+      body
+      senderId
+      contentType
+      createdAt
+    }
+    conversation_participant {
+      id
+      user_id
+      participant {
+        username
+        avatar
+        id
+        status  
+      }
+    }
+  }
+}
+
+
+query getConversationById($id: String!) {
+  conversations_by_pk(id: $id) {
+    id
+    messages {
+      body
+      attachments
+      contentType
+      createdAt
+      id
+      senderId
+    }
+    type
+    unreadCount
+    conversation_participant {
+      user_id
+      participant {
+        id
+        avatar
+        lastActivity
+        status
+        username
+        phone
+        position
+        email
+        address
+      }
+    }
+  }
+}
+

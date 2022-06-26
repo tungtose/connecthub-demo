@@ -1,0 +1,25 @@
+mutation Login($params: LoginArgs!) {
+  login(params: $params) {
+    token
+    userId
+    error
+  }
+}
+
+mutation SendMessage($object: messages_insert_input!) {
+  insert_messages_one(object: $object) {
+    attachments
+    body
+    contentType
+    conversation_id
+    createdAt
+    id
+    senderId
+  }
+}
+
+mutation getPresignUrl($params: PresignUrlArgs!) {
+  getPresignUrl(params: $params) {
+    url
+  }
+}

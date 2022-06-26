@@ -1,0 +1,35 @@
+subscription getConversationSubcription($id: String!) {
+  conversations_by_pk(id: $id) {
+    id
+    messages {
+      body
+      attachments
+      conversation_id
+      createdAt
+      senderId
+      id
+      contentType
+    }
+    type
+    unreadCount
+    conversation_participant {
+      participant {
+        address
+        avatar
+        created_at
+        email
+        id
+        lastActivity
+        name
+        phone
+        position
+        status
+        updated_at
+        username
+      }
+      conversation_id
+      id
+    }
+  }
+}
+
