@@ -10,6 +10,7 @@ const withTM = require('next-transpile-modules')([
 ]);
 
 module.exports = withTM({
+  output: 'standalone',
   swcMinify: false,
   trailingSlash: true,
   env: {
