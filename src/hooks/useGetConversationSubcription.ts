@@ -3,7 +3,7 @@ import { useQueryClient } from "react-query";
 import { GetConversationSubcriptionDocument } from 'src/generated/graphqlSdk';
 import { getToken } from "src/utils/jwt";
 
-const url = "ws://localhost:8080/v1/graphql";
+const url = process.env.NEXT_PUBLIC_GRAPHQL_WS_ENDPOINT || "ws://localhost:8080/v1/graphql";
 
 export const useGetConversationSubcription = (id: string) => {
   const queryClient = useQueryClient();
