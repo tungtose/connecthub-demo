@@ -53,9 +53,7 @@ export default function ChatWindow() {
   const dispatch = useDispatch();
   const { pathname, query } = useRouter();
   const { conversationKey } = query;
-  const { contacts, recipients, participants, activeConversationId } = useSelector(
-    (state: RootState) => state.chat
-  );
+
   const conversation = useSelector((state: RootState) => conversationSelector(state));
   const { data: conversation2 } = useQuery("getConversationById", () => [], {
     refetchOnMount: false,
@@ -73,33 +71,33 @@ export default function ChatWindow() {
     participant => participant.user_id !== currentUserId
   ).map(participant => participant.participant);
 
-  const displayParticipants = participants.filter(
-    (item) => item?.id !== '8864c717-587d-472a-929a-8e5f298024da-0'
-  );
+  // const displayParticipants = participants.filter(
+  //   (item) => item?.id !== '8864c717-587d-472a-929a-8e5f298024da-0'
+  // );
 
-  useEffect(() => {
-    const getDetails = async () => {
-      dispatch(getParticipants(`${conversationKey}`));
-      try {
-        await dispatch(getConversation(`${conversationKey}`));
-      } catch (error) {
-        console.error(error);
-        Router.push(PATH_DASHBOARD.chat.new);
-      }
-    };
-    if (conversationKey) {
-      getDetails();
-    } else if (activeConversationId) {
-      dispatch(resetActiveConversation());
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [conversationKey]);
+  // useEffect(() => {
+  //   const getDetails = async () => {
+  //     dispatch(getParticipants(`${conversationKey}`));
+  //     try {
+  //       await dispatch(getConversation(`${conversationKey}`));
+  //     } catch (error) {
+  //       console.error(error);
+  //       Router.push(PATH_DASHBOARD.chat.new);
+  //     }
+  //   };
+  //   if (conversationKey) {
+  //     getDetails();
+  //   } else if (activeConversationId) {
+  //     dispatch(resetActiveConversation());
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [conversationKey]);
 
-  useEffect(() => {
-    if (activeConversationId) {
-      dispatch(markConversationAsRead(activeConversationId));
-    }
-  }, [dispatch, activeConversationId]);
+  // useEffect(() => {
+  //   if (activeConversationId) {
+  //     dispatch(markConversationAsRead(activeConversationId));
+  //   }
+  // }, [dispatch, activeConversationId]);
 
   const handleAddRecipients = (recipients: Participant[]) => {
     dispatch(addRecipients(recipients));
@@ -113,13 +111,7 @@ export default function ChatWindow() {
     <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
       {mode === 'DETAIL' ? (
         <ChatHeaderDetail participants={displayParticipants1} />
-      ) : (
-        <ChatHeaderCompose
-          recipients={recipients}
-          contacts={Object.values(contacts.byId)}
-          onAddRecipients={handleAddRecipients}
-        />
-      )}
+      ) : null}
 
       <Divider />
 

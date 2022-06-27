@@ -27,13 +27,6 @@ Chat.getLayout = function getLayout(page: React.ReactElement) {
 export default function Chat() {
   const { themeStretch } = useSettings();
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getConversations());
-    dispatch(getContacts());
-  }, [dispatch]);
-
   return (
     <Page title="Chat">
       <Container maxWidth={themeStretch ? false : 'xl'}>
